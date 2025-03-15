@@ -34,17 +34,19 @@
             saveBtn = new Button();
             button3 = new Button();
             logs_viewer = new RichTextBox();
-            radioButton1 = new RadioButton();
+            start_on_boot_yes = new RadioButton();
+            label2 = new Label();
+            start_on_boot_no = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)threshold_field).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Arial", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(12, 15);
             label1.Name = "label1";
-            label1.Size = new Size(73, 17);
+            label1.Size = new Size(74, 20);
             label1.TabIndex = 1;
             label1.Text = "Threshold";
             // 
@@ -91,6 +93,7 @@
             button3.TabIndex = 5;
             button3.Text = "Exit";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // logs_viewer
             // 
@@ -102,23 +105,50 @@
             logs_viewer.TabIndex = 6;
             logs_viewer.Text = "";
             // 
-            // radioButton1
+            // start_on_boot_yes
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(12, 56);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(94, 19);
-            radioButton1.TabIndex = 7;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "radioButton1";
-            radioButton1.UseVisualStyleBackColor = true;
+            start_on_boot_yes.Appearance = Appearance.Button;
+            start_on_boot_yes.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            start_on_boot_yes.Location = new Point(321, 56);
+            start_on_boot_yes.Name = "start_on_boot_yes";
+            start_on_boot_yes.Size = new Size(38, 25);
+            start_on_boot_yes.TabIndex = 7;
+            start_on_boot_yes.TabStop = true;
+            start_on_boot_yes.Text = "Yes";
+            start_on_boot_yes.TextAlign = ContentAlignment.MiddleCenter;
+            start_on_boot_yes.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 11.25F);
+            label2.Location = new Point(12, 58);
+            label2.Name = "label2";
+            label2.Size = new Size(308, 20);
+            label2.TabIndex = 8;
+            label2.Text = "Start automatically when the computer starts:";
+            // 
+            // start_on_boot_no
+            // 
+            start_on_boot_no.Appearance = Appearance.Button;
+            start_on_boot_no.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            start_on_boot_no.Location = new Point(361, 56);
+            start_on_boot_no.Name = "start_on_boot_no";
+            start_on_boot_no.Size = new Size(38, 25);
+            start_on_boot_no.TabIndex = 9;
+            start_on_boot_no.TabStop = true;
+            start_on_boot_no.Text = "No";
+            start_on_boot_no.TextAlign = ContentAlignment.MiddleCenter;
+            start_on_boot_no.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(669, 507);
-            Controls.Add(radioButton1);
+            Controls.Add(start_on_boot_no);
+            Controls.Add(label2);
+            Controls.Add(start_on_boot_yes);
             Controls.Add(logs_viewer);
             Controls.Add(button3);
             Controls.Add(saveBtn);
@@ -141,6 +171,8 @@
         private Button saveBtn;
         private Button button3;
         private RichTextBox logs_viewer;
-        private RadioButton radioButton1;
+        private RadioButton start_on_boot_yes;
+        private Label label2;
+        private RadioButton start_on_boot_no;
     }
 }

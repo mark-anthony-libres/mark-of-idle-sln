@@ -24,15 +24,24 @@ namespace mark_of_idle
             //CheckIfAdministratorAndElevate();
             this.script_instance = new Script();
 
-            Debug.WriteLine(this.IsAdministrator());
-
             threshold_field.Value = this.script_instance.settings.result.threshold;
+
+            start_on_boot_yes.Checked = false;
+            start_on_boot_no.Checked = true;
+
+            if (this.script_instance.boot_start_up.IsBootStartUp)
+            {
+                start_on_boot_yes.Checked = true;
+                start_on_boot_no.Checked = false;
+            }
 
             if (!this.script_instance.settings.result.is_active)
             {
                 //when program is not active
                 launch_btn.Text = "Start";
                 logs_viewer.ScrollBars = RichTextBoxScrollBars.Vertical;
+                start_on_boot_yes.Enabled = true;
+                start_on_boot_no.Enabled = true;
             }
             else
             {
@@ -41,13 +50,13 @@ namespace mark_of_idle
                 threshold_field.Enabled = false;
                 saveBtn.Enabled = false;
                 logs_viewer.ScrollBars = RichTextBoxScrollBars.None;
+                start_on_boot_yes.Enabled = false;
+                start_on_boot_no.Enabled = false;
 
                 //Task.Run(() => this.script_instance.activate());
 
             }
-            
 
-            
             System.Windows.Forms.Timer addLogTimer = new System.Windows.Forms.Timer();
             addLogTimer.Interval = 1000;  // 1000 milliseconds = 1 second
             addLogTimer.Tick += (sender, e) =>
@@ -55,7 +64,7 @@ namespace mark_of_idle
 
                 List<string> newContent = this.script_instance.logs.ExcludeDifferences(logs_viewer.Text);
 
-                if(newContent.Count > 0)
+                if (newContent.Count > 0)
                 {
                     if (logs_viewer.Text.Length > 0)
                     {
@@ -71,62 +80,29 @@ namespace mark_of_idle
                 }
 
 
-             
+
             };
             addLogTimer.Start();
             logs_viewer.SelectionStart = logs_viewer.Text.Length; // Set caret to the end
             logs_viewer.ScrollToCaret(); // Scroll to caret (end)
+
+
+
+
         }
-
-
-        // Method to check if the current process is running as Administrator
-        private bool IsAdministrator()
-        {
-            var identity = WindowsIdentity.GetCurrent();
-            var principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
-
-        // Method to elevate the process if it's not already running as administrator
-        private void CheckIfAdministratorAndElevate()
-        {
-            if (!IsAdministrator())
-            {
-                // If not running as Administrator, restart the application with elevated privileges
-                RunAsAdministrator();
-                Application.Exit();  // Exit the current non-elevated process immediately
-            }
-        }
-
-        // Method to restart the application with Administrator privileges
-        private void RunAsAdministrator()
-        {
-
-            string exePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string exeDirectory = System.IO.Path.GetDirectoryName(exePath);
-            string exeFile = System.IO.Path.Combine(exeDirectory, "mark_of_idle.exe");
-
-            ProcessStartInfo startInfo = new ProcessStartInfo()
-            {
-                FileName = exeFile, // Path to the current executable
-                Verb = "runas", // This will prompt the user for elevated privileges
-                UseShellExecute = true
-            };
-
-            try
-            {
-                Process.Start(startInfo); // Start the process with admin rights
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to elevate the process: {ex.Message}");
-            }
-        }
-
 
         private void launch_btn_Click(object sender, EventArgs e)
         {
             this.script_instance = new Script();
+
+            start_on_boot_yes.Checked = false;
+            start_on_boot_no.Checked = true;
+
+            if (this.script_instance.boot_start_up.IsBootStartUp)
+            {
+                start_on_boot_yes.Checked = true;
+                start_on_boot_no.Checked = false;
+            }
 
             if (!this.script_instance.settings.result.is_active)
             {
@@ -136,6 +112,8 @@ namespace mark_of_idle
                 threshold_field.Enabled = false;
                 saveBtn.Enabled = false;
                 logs_viewer.ScrollBars = RichTextBoxScrollBars.None;
+                start_on_boot_yes.Enabled = false;
+                start_on_boot_no.Enabled = false;
 
                 Data settings_data = this.script_instance.settings.result.copy();
                 settings_data.is_active = true;
@@ -154,6 +132,8 @@ namespace mark_of_idle
                 threshold_field.Enabled = true;
                 saveBtn.Enabled = true;
                 logs_viewer.ScrollBars = RichTextBoxScrollBars.Vertical;
+                start_on_boot_yes.Enabled = true;
+                start_on_boot_no.Enabled = true;
 
                 Data settings_data = this.script_instance.settings.result.copy();
                 settings_data.is_active = false;
@@ -171,14 +151,28 @@ namespace mark_of_idle
             this.script_instance = new Script();
             Data settings_data = this.script_instance.settings.result.copy();
             settings_data.is_active = false;
-            settings_data.threshold = (int) threshold_field.Value;
+            settings_data.threshold = (int)threshold_field.Value;
 
             this.script_instance.settings.set(settings_data);
+
+            //when user choose "no" button on "start on boot" field
+            if (start_on_boot_no.Checked)
+            {
+                this.script_instance.boot_start_up.RemoveBootAtStartUp();
+            }
+            else
+            {
+                //when user choose "yes" button on "start on boot" field
+                this.script_instance.boot_start_up.SetBootAtStartUp();
+            }
 
             MessageBox.Show("Data has been successfully saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

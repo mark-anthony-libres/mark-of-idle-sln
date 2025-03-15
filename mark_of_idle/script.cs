@@ -11,6 +11,73 @@ using System.Threading.Tasks;
 namespace mark_of_idle
 {
 
+
+    class BootAtStartUp
+    {
+        public string boot_start_path;
+        private const string taskName = "mark_of_idle_start_on_boot";
+        private const string registryKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
+
+        public BootAtStartUp(string project_path)
+        {
+            this.boot_start_path = Path.Combine(project_path, "Infra", "boot_start.vbs");
+        }
+
+        public void SetBootAtStartUp()
+        {
+            if (this.IsBootStartUp) return;
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(BootAtStartUp.registryKey, true))
+            {
+                if (key != null)
+                {
+                    string command = $"wscript.exe \"{this.boot_start_path}\"";
+                    key.SetValue(BootAtStartUp.taskName, command);
+                    Debug.WriteLine($"VBS script added to registry for all users: {this.boot_start_path}");
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to open registry key.");
+                }
+            }
+
+
+        }
+
+        public void RemoveBootAtStartUp()
+        {
+            if (!this.IsBootStartUp) return;
+
+            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(BootAtStartUp.registryKey, true))
+            {
+                if (key != null)
+                {
+                    // Remove the registry entry by its taskName
+                    key.DeleteValue(BootAtStartUp.taskName, false); // The 'false' means do not throw an exception if the value doesn't exist.
+
+                    Debug.WriteLine($"VBS script removed from registry: {this.boot_start_path}");
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to open registry key.");
+                }
+            }
+        }
+
+        public bool IsBootStartUp
+        {
+            get
+            {
+                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(BootAtStartUp.registryKey, true))
+                {
+                    return key.GetValue(BootAtStartUp.taskName) != null;
+                }
+            }
+        }
+
+
+    }
+
     class Logs
     {
         private string folder_path;
@@ -26,8 +93,8 @@ namespace mark_of_idle
             var logFiles = Directory.GetFiles(this.folder_path, "logfile.log.*")
                                     .OrderByDescending(f => File.GetLastWriteTime(f))  // Sort by last modified time
                                     .ToList();
-                                    //.OrderByDescending(f => GetDateFromFilename(f))
-                                    //.ToList();
+            //.OrderByDescending(f => GetDateFromFilename(f))
+            //.ToList();
 
             if (logFiles.Any())
             {
@@ -89,7 +156,7 @@ namespace mark_of_idle
 
 
     }
- 
+
 
     class Settings
     {
@@ -133,18 +200,17 @@ namespace mark_of_idle
 
 
     }
- 
+
     class Script
     {
         public string project_path;
         public string venvActivationScript;
         public string mainScript;
         public string batFilePath;
-        public string boot_start_path;
-        private const string taskName = "mark_of_idle_start_on_boot";
-        private const string registryKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
         public Settings settings;
         public Logs logs;
+        public BootAtStartUp boot_start_up;
+
         public Script()
         {
             this.project_path = Environment.GetEnvironmentVariable("MARKOFIDLE");
@@ -165,17 +231,10 @@ namespace mark_of_idle
 
             this.mainScript = Path.Combine(this.project_path, "main.py");
             this.batFilePath = Path.Combine(this.project_path, "Infra", "run_venv.bat");
-            this.boot_start_path = Path.Combine(this.project_path, "Infra", "boot_start.vbs");
+
             this.settings = new Settings(this.project_path);
             this.logs = new Logs(this.project_path);
-
-            this.SetBootAtStartUp();
-
-            //bool is_task_exists = this.DoesTaskExist();
-
-            //Debug.WriteLine(is_task_exists);
-
-
+            this.boot_start_up = new BootAtStartUp(this.project_path);
 
         }
 
@@ -200,7 +259,7 @@ namespace mark_of_idle
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                CreateNoWindow = false // Don't open the command prompt window
+                CreateNoWindow = true // Don't open the command prompt window
             };
 
             using (Process process = Process.Start(startInfo))
@@ -224,93 +283,5 @@ namespace mark_of_idle
 
         }
 
-        private void SetBootAtStartUp()
-        {
-
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(Script.registryKey, true))
-            {
-                if (key != null)
-                {
-                    string command = $"wscript.exe \"{this.boot_start_path}\"";
-                    key.SetValue(Script.taskName, command);
-                    Debug.WriteLine($"VBS script added to registry for all users: {this.boot_start_path}");
-                }
-                else
-                {
-                    Debug.WriteLine("Failed to open registry key.");
-                }
-            }
-
-
-           // string taskName = "mark_of_idle_start_on_boot";
-           // string taskAction = $"/c start '' '{this.boot_start_path}'";  // Correctly quoting the path
-
-           // // Construct the correct schtasks command
-           // string taskCommand = $"schtasks /create /tn \"{this.taskName}\" /tr \"cmd.exe {taskAction}\" /sc onlogon /f /ru SYSTEM";
-
-
-           // Debug.WriteLine(taskCommand);
-           //this.doProccess(taskCommand);
-
-        }
-
-        private void RemoveBootAtStartUp(string taskName)
-        {
-
-            //string taskCommand = $"schtasks /delete /tn '{this.taskName}' /f";
-            //this.doProccess(taskCommand);
-
-            using (RegistryKey key = Registry.LocalMachine.OpenSubKey(Script.registryKey, true))
-            {
-                if (key != null)
-                {
-                    // Remove the registry entry by its taskName
-                    key.DeleteValue(Script.taskName, false); // The 'false' means do not throw an exception if the value doesn't exist.
-
-                    Debug.WriteLine($"VBS script removed from registry: {this.boot_start_path}");
-                }
-                else
-                {
-                    Debug.WriteLine("Failed to open registry key.");
-                }
-            }
-        }
-
-        private bool DoesTaskExist()
-        {
-            // Run schtasks /query to list all scheduled tasks
-            ProcessStartInfo startInfo = new ProcessStartInfo()
-            {
-                FileName = "schtasks",
-                Arguments = $"/query",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            using (Process process = Process.Start(startInfo))
-            {
-                string output = process.StandardOutput.ReadToEnd();
-                string error = process.StandardError.ReadToEnd();
-                process.WaitForExit();
-
-
-
-                // If the task exists, schtasks /query will output information about it
-                if (!string.IsNullOrEmpty(output) && !output.Contains("ERROR"))
-                {
-                    return true; // Task exists
-                }
-                return false; // Task does not exist
-            }
-
-        }
-
-
-
-
-
-
-        }
+    }
 }
