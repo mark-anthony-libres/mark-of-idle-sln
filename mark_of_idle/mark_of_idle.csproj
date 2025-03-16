@@ -13,4 +13,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cmd.exe /c &quot;cd ..\ &amp;&amp; build.bat&quot; " />
+  </Target>
+
 </Project>

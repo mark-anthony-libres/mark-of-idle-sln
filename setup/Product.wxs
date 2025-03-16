@@ -23,13 +23,14 @@
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="Mark_Of_Idle">
 					<!-- Files will be installed here -->
-					<Component Id="mark_od_idle_exe" Guid="{160A62F1-7E07-431C-B030-FB59A171B203}">
-						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.exe" />
-						<File Id="dependency1" Name="Newtonsoft.Json.dll" Source="..\mark_of_idle\bin\Debug\net8.0-windows\Newtonsoft.Json.dll" />
-						<File Id="dependency2" Name="mark_of_idle.dll" Source="..\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.dll" />
-						<File Id="dependency3" Name="mark_of_idle.deps.json" Source="..\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.deps.json" />
-						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.pdb" />
-						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.runtimeconfig.json" />
+					<Component Id="mark_of_idle_setup" Guid="{160A62F1-7E07-431C-B030-FB59A171B203}">
+						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\output\mark_of_idle.exe" />
+						<File Id="dependency1" Name="Newtonsoft.Json.dll" Source="..\output\Newtonsoft.Json.dll" />
+						<File Id="dependency2" Name="mark_of_idle.dll" Source="..\output\mark_of_idle.dll" />
+						<File Id="dependency3" Name="mark_of_idle.deps.json" Source="..\output\mark_of_idle.deps.json" />
+						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\output\mark_of_idle.pdb" />
+						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\output\mark_of_idle.runtimeconfig.json" />
+						<File Id="dependency6" Name="scripts.zip" Source="..\output\scripts.zip" />
 					</Component>
 				</Directory>
 			</Directory>
@@ -38,7 +39,7 @@
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<ComponentRef Id="mark_od_idle_exe" />
+			<ComponentRef Id="mark_of_idle_setup" />
 		</ComponentGroup>
 	</Fragment>
 </Wix>

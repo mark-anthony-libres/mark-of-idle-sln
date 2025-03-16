@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>ef878227-c085-4f3e-9319-f5292c7f84f2</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>mark_od_idle_setup</OutputName>
+    <OutputName>mark_of_idle_setup</OutputName>
     <OutputType>Package</OutputType>
     <Name>mark_of_idle_setup</Name>
   </PropertyGroup>

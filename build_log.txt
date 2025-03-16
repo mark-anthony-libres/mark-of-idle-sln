@@ -1,0 +1,49 @@
+Deleting all items in the output folder...
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\mark_of_idle.deps.json
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\mark_of_idle.dll
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\mark_of_idle.exe
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\mark_of_idle.pdb
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\mark_of_idle.runtimeconfig.json
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\Newtonsoft.Json.dll
+Deleted file - C:\Users\mark.anthony.libres\source\repos\mark_of_idle\output\scripts.zip
+Copying contents of mark_of_idle\bin\Debug\net8.0-windows to output folder...
+.\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.deps.json
+.\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.dll
+.\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.exe
+.\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.pdb
+.\mark_of_idle\bin\Debug\net8.0-windows\mark_of_idle.runtimeconfig.json
+.\mark_of_idle\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+6 File(s) copied
+Zipping scripts folder
+Building the setup project...
+MSBuild version 17.13.15+18b3035f6 for .NET Framework
+Build started 3/16/2025 1:37:30 PM.
+
+Project "C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj" on node 1 (Build target(s)).
+C:\Program Files (x86)\MSBuild\Microsoft\WiX\v3.x\wix.targets(1201,5): warning : Solution properties are only available during IDE builds or when building the solution file from the command line. To turn off this warning set <DefineSolutionProperties>false</DefineSolutionProperties> in your .wixproj file. [C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj]
+Compile:
+Skipping target "Compile" because all output files are up-to-date with respect to the input files.
+Link:
+  C:\Program Files (x86)\WiX Toolset v3.14\bin\Light.exe -out C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\bin\x64\Release\mark_od_idle_setup.msi -pdbout C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\bin\x64\Release\mark_od_idle_setup.wixpdb -cultures:null -contentsfile obj\x64\Release\mark_of_idle_setup.wixproj.BindContentsFileListnull.txt -outputsfile obj\x64\Release\mark_of_idle_setup.wixproj.BindOutputsFileListnull.txt -builtoutputsfile obj\x64\Release\mark_of_idle_setup.wixproj.BindBuiltOutputsFileListnull.txt -wixprojectfile C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj obj\x64\Release\Product.wixobj
+  Windows Installer XML Toolset Linker version 3.14.1.8722
+  Copyright (c) .NET Foundation and contributors. All rights reserved.
+C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\Product.wxs(26): error LGHT0204: ICE80: This 64BitComponent mark_od_idle_exe uses 32BitDirectory INSTALLFOLDER [C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj]
+Done Building Project "C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj" (Build target) (1) ->
+(AddSolutionDefineConstants target) -> 
+  C:\Program Files (x86)\MSBuild\Microsoft\WiX\v3.x\wix.targets(1201,5): warning : Solution properties are only available during IDE builds or when building the solution file from the command line. To turn off this warning set <DefineSolutionProperties>false</DefineSolutionProperties> in your .wixproj file. [C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj]
+
+
+"C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj" (Build target) (1) ->
+(Link target) -> 
+  C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\Product.wxs(26): error LGHT0204: ICE80: This 64BitComponent mark_od_idle_exe uses 32BitDirectory INSTALLFOLDER [C:\Users\mark.anthony.libres\source\repos\mark_of_idle\setup\mark_of_idle_setup.wixproj]
+
+    1 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:03.69
+Folder has been zipped successfully.
+Press any key to continue . . . 

@@ -53,6 +53,7 @@ namespace mark_of_idle
                 start_on_boot_yes.Enabled = false;
                 start_on_boot_no.Enabled = false;
 
+
                 //Task.Run(() => this.script_instance.activate());
 
             }
@@ -85,8 +86,6 @@ namespace mark_of_idle
             addLogTimer.Start();
             logs_viewer.SelectionStart = logs_viewer.Text.Length; // Set caret to the end
             logs_viewer.ScrollToCaret(); // Scroll to caret (end)
-
-
 
 
         }
@@ -174,5 +173,7 @@ namespace mark_of_idle
         {
             this.Close();
         }
+
+
     }
 }
