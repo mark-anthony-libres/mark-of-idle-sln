@@ -1,0 +1,8 @@
+Starting extraction: 3/16/2025 10:41:55 PM
+ZIP file: .\scripts.zip
+Destination folder: .\testing
+Shell object created.
+The ZIP file could not be opened.
+The destination folder is invalid or does not exist.
+Extraction failed due to invalid ZIP file or destination folder.
+Extraction completed: 3/16/2025 10:41:55 PM

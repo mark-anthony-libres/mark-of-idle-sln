@@ -20,8 +20,16 @@ namespace mark_of_idle
 
         public Form2()
         {
+            bool isNewInstance;
+            Mutex mutex = new Mutex(true, "MarkOfIdle", out isNewInstance);
+
+            if(!isNewInstance) {
+                MessageBox.Show("Another instance of the program is already running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(0);
+            }
+
+
             InitializeComponent();
-            //CheckIfAdministratorAndElevate();
             this.script_instance = new Script();
 
             threshold_field.Value = this.script_instance.settings.result.threshold;

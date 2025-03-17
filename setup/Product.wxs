@@ -11,10 +11,24 @@
 		</Feature>
 
 		<!-- Add Custom Action to launch executable after installation -->
-		<CustomAction Id="LaunchApp" Return="asyncNoWait" Execute="commit" Impersonate="no" Directory="INSTALLFOLDER" ExeCommand="cmd.exe /C start mark_of_idle.exe" />
+		<!-- <CustomAction Id="LaunchApp" Return="asyncNoWait" Execute="commit" Impersonate="no" Directory="INSTALLFOLDER" ExeCommand="cmd.exe /C start /B mark_of_idle.exe" /> 
 		<InstallExecuteSequence>
 			<Custom Action="LaunchApp" After="InstallFiles" />
+		</InstallExecuteSequence> -->
+		
+	
+		 <CustomAction Id="RunBatchFileAction" 
+                  Execute="deferred" 
+                  Return="check" 
+                  Impersonate="yes" 
+				  Directory="INSTALLFOLDER"
+                  ExeCommand="[INSTALLFOLDER]first.bat" />
+	
+		<InstallExecuteSequence>
+		  <Custom Action="RunBatchFileAction" After="InstallFiles" />
 		</InstallExecuteSequence>
+		
+		
 		
 	</Product>
 
@@ -31,6 +45,9 @@
 						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\output\mark_of_idle.pdb" />
 						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\output\mark_of_idle.runtimeconfig.json" />
 						<File Id="dependency6" Name="scripts.zip" Source="..\output\scripts.zip" />
+						<File Id="dependency7" Name="setup.bat" Source="..\setup.bat" />
+						<File Id="dependency8" Name="first.bat" Source="..\first.bat" />
+						<File Id="dependency9" Name="shortcut.vbs" Source="..\shortcut.vbs" />
 					</Component>
 				</Directory>
 			</Directory>

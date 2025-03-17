@@ -102,7 +102,7 @@ namespace mark_of_idle
             }
             else
             {
-                throw new FileNotFoundException("No log files found.");
+                return null;
             }
         }
 
@@ -111,6 +111,12 @@ namespace mark_of_idle
         {
 
             this.latest_file_path = this.LoadLatestLogFile();
+
+            if(this.latest_file_path == null)
+            {
+                return "";
+            }
+
             using (FileStream fs = new FileStream(this.latest_file_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (StreamReader sr = new StreamReader(fs))
             {
@@ -240,7 +246,7 @@ namespace mark_of_idle
 
         public void activate()
         {
-
+           
             string command = $"/C cd \"{this.project_path}\" && .\\Infra\\run_venv.bat";
             this.doProccess(command);
 

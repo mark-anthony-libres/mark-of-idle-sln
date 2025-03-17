@@ -1,0 +1,1 @@
+call mark_of_idle_setup.msi /l*v install_log.txt    
