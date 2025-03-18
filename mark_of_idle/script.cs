@@ -18,9 +18,9 @@ namespace mark_of_idle
         private const string taskName = "mark_of_idle_start_on_boot";
         private const string registryKey = @"Software\Microsoft\Windows\CurrentVersion\Run";
 
-        public BootAtStartUp(string project_path)
+        public BootAtStartUp(string scriptsFolder)
         {
-            this.boot_start_path = Path.Combine(project_path, "Infra", "boot_start.vbs");
+            this.boot_start_path = Path.Combine(scriptsFolder, "Infra", "boot_start.vbs");
         }
 
         public void SetBootAtStartUp()
@@ -82,9 +82,9 @@ namespace mark_of_idle
     {
         private string folder_path;
         private string latest_file_path;
-        public Logs(string project_path)
+        public Logs(string scriptsFolder)
         {
-            this.folder_path = Path.Combine(project_path, "logs");
+            this.folder_path = Path.Combine(scriptsFolder, "logs");
             this.latest_file_path = this.LoadLatestLogFile();
         }
 
@@ -182,9 +182,9 @@ namespace mark_of_idle
             }
         }
 
-        public Settings(string project_path)
+        public Settings(string script_folder)
         {
-            this.data_path = Path.Combine(project_path, "data.json");
+            this.data_path = Path.Combine(script_folder, "data.json");
 
             if (!File.Exists(this.data_path))
             {
@@ -211,6 +211,7 @@ namespace mark_of_idle
     {
         public string project_path;
         public string venvActivationScript;
+        public string scriptsFolder;
         public string mainScript;
         public string batFilePath;
         public Settings settings;
@@ -220,6 +221,7 @@ namespace mark_of_idle
         public Script()
         {
             this.project_path = Environment.GetEnvironmentVariable("MARKOFIDLE");
+            this.scriptsFolder = Path.Combine(this.project_path, "scripts");
 
             if (string.IsNullOrEmpty(this.project_path))
             {
@@ -227,7 +229,7 @@ namespace mark_of_idle
             }
 
 
-            this.venvActivationScript = Path.Combine(this.project_path, "venv", "Scripts", "activate.bat");
+            this.venvActivationScript = Path.Combine(this.scriptsFolder,"venv", "Scripts", "activate.bat");
 
 
             if (!File.Exists(this.venvActivationScript))
@@ -235,19 +237,19 @@ namespace mark_of_idle
                 throw new InvalidOperationException($"Activation script not found at: {this.project_path}");
             }
 
-            this.mainScript = Path.Combine(this.project_path, "main.py");
-            this.batFilePath = Path.Combine(this.project_path, "Infra", "run_venv.bat");
+            this.mainScript = Path.Combine(this.scriptsFolder, "main.py");
+            this.batFilePath = Path.Combine(this.scriptsFolder, "Infra", "run_venv.bat");
 
-            this.settings = new Settings(this.project_path);
-            this.logs = new Logs(this.project_path);
-            this.boot_start_up = new BootAtStartUp(this.project_path);
+            this.settings = new Settings(this.scriptsFolder);
+            this.logs = new Logs(this.scriptsFolder);
+            this.boot_start_up = new BootAtStartUp(this.scriptsFolder);
 
         }
 
         public void activate()
         {
            
-            string command = $"/C cd \"{this.project_path}\" && .\\Infra\\run_venv.bat";
+            string command = $"/C cd \"{this.project_path}\" && .\\scripts\\Infra\\run_venv.bat";
             this.doProccess(command);
 
         }

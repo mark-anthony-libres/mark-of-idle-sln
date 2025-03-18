@@ -3,10 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
 output/*
+output/
 scripts/venv/
+scripts/logs/
 **/__pycache__/
 *.zip
+./output/mark_of_idle_setup.msi
+
 
 
 # User-specific files
@@ -367,3 +372,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+

@@ -1,40 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Mark of Idle" Language="1033" Version="1.0.0.0" Manufacturer="CIO" UpgradeCode="e1fa3059-b548-4c1b-9caa-35ee25cf831f">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Package Name="Mark of Idle" Language="1033" Version="1.0.0.0" Manufacturer="CIO" UpgradeCode="e1fa3059-b548-4c1b-9caa-35ee25cf831f" InstallerVersion="200">
+		
 		
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+
+		<Property Id="MsiLogging" Value="voicewarmup" />
 
 		<Feature Id="ProductFeature" Title="Mark of Idle" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
+		
+		 <CustomAction Id="RunBatchFileAction" Execute="deferred" Return="check" Impersonate="yes" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]first.bat" />
 
-		<!-- Add Custom Action to launch executable after installation -->
-		<!-- <CustomAction Id="LaunchApp" Return="asyncNoWait" Execute="commit" Impersonate="no" Directory="INSTALLFOLDER" ExeCommand="cmd.exe /C start /B mark_of_idle.exe" /> 
-		<InstallExecuteSequence>
-			<Custom Action="LaunchApp" After="InstallFiles" />
-		</InstallExecuteSequence> -->
-		
-	
-		 <CustomAction Id="RunBatchFileAction" 
-                  Execute="deferred" 
-                  Return="check" 
-                  Impersonate="yes" 
-				  Directory="INSTALLFOLDER"
-                  ExeCommand="[INSTALLFOLDER]first.bat" />
+		<CustomAction Id="UninstallCustomAction" ExeCommand='/c echo Uninstalling MyApp...' Execute="deferred" Return="check" Impersonate="no" FileRef="mark_of_idle_exe" />
 	
 		<InstallExecuteSequence>
-		  <Custom Action="RunBatchFileAction" After="InstallFiles" />
+		    <Custom Action="RunBatchFileAction" After="InstallFiles" />
+			<Custom Action="UninstallCustomAction" After="RemoveFiles" Condition="REMOVE" />
 		</InstallExecuteSequence>
+
 		
-		
-		
-	</Product>
+	</Package>
 
 	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
+			<StandardDirectory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="Mark_Of_Idle">
 					<!-- Files will be installed here -->
 					<Component Id="mark_of_idle_setup" Guid="{160A62F1-7E07-431C-B030-FB59A171B203}">
@@ -50,9 +39,8 @@
 						<File Id="dependency9" Name="shortcut.vbs" Source="..\shortcut.vbs" />
 					</Component>
 				</Directory>
-			</Directory>
-		</Directory>
-	</Fragment>
+			</StandardDirectory>
+		</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">

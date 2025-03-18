@@ -40,10 +40,13 @@ if defined python_path (
 set ZIP_FILE=.\scripts.zip
 
 :: Destination folder where the files will be extracted
-set DEST_DIR="."
+set BASE_DIRECTORY=%CD%
+set SCRIPTS_FOLDER=%CD%\scripts
 
 echo ========= BASE DIRECTORY =========
 echo %CD%
+echo ========= SCRIPTS DIRECTORY =========
+echo %SCRIPTS_FOLDER%
 
 @REM rmdir /s /q "%DEST_DIR%"
 @REM mkdir "%DEST_DIR%"
@@ -54,15 +57,11 @@ if not exist "%ZIP_FILE%" (
     exit /b 1
 )
 
-:: Check if the destination directory exists, create if not
-if not exist "%DEST_DIR%" (
-    echo Destination directory does not exist, creating it...
-    mkdir "%DEST_DIR%"
-)
+mkdir "%SCRIPTS_FOLDER%"
 
 :: Use PowerShell to unzip the file
-echo ========= Unzipping %ZIP_FILE% to %DEST_DIR%...  =========
-powershell.exe -Command "Expand-Archive -Path '%ZIP_FILE%' -DestinationPath '%DEST_DIR%'"
+echo ========= Unzipping %ZIP_FILE% to %SCRIPTS_FOLDER%...  =========
+powershell.exe -Command "Expand-Archive -Path '%ZIP_FILE%' -DestinationPath '%SCRIPTS_FOLDER%'"
 
 :: Check if unzip was successful
 if %ERRORLEVEL% equ 0 (
@@ -74,18 +73,23 @@ if %ERRORLEVEL% equ 0 (
 
 ::   -------------------------
 echo ========= create venv folder and activate it =========
+cd %SCRIPTS_FOLDER%
+echo %CD%
 call %python_path% -m venv venv
-call ".\venv\Scripts\activate"
+call "./venv/Scripts/activate"
 call pip install -r requirements.txt
+cd %BASE_DIRECTORY%
+
+echo "go back to main directory %BASE_DIRECTORY%"
 
 echo  ======= Remove misc file  =======
-rmdir /s /q "%ZIP_FILE%"
+rmdir /s /q %ZIP_FILE%
 
 echo ========= set environemt variable =========
-setx MARKOFIDLE "%CD%" /M
+setx MARKOFIDLE "%BASE_DIRECTORY%" /M
 
 echo ========= create shortcut =========
-cscript //nologo ".\shortcut.vbs"
+cscript //nologo "%BASE_DIRECTORY%\shortcut.vbs"
 
 echo ======= Starting the application ======
 start /B mark_of_idle.exe

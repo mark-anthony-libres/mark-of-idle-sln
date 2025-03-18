@@ -5,7 +5,7 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mark_of_idle", "mark_of_idle\mark_of_idle.csproj", "{C19451E2-8AC8-4CD6-A82C-011140CDE218}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "mark_of_idle_setup", "setup\mark_of_idle_setup.wixproj", "{EF878227-C085-4F3E-9319-F5292C7F84F2}"
+Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "mark_of_idle_setup", "setup\mark_of_idle_setup.wixproj", "{EF878227-C085-4F3E-9319-F5292C7F84F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
