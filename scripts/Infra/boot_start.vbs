@@ -1,7 +1,7 @@
 Set WshShell = CreateObject("WScript.Shell")
 
 ' Get the full path of the batch file using the %MARKOFIDLE% environment variable
-batchFilePath = WshShell.ExpandEnvironmentStrings("%MARKOFIDLE%") & "Infra\run_venv.bat"
+batchFilePath = WshShell.ExpandEnvironmentStrings("%MARKOFIDLE%") & "scripts\Infra\run_venv.bat"
 
 ' Add quotes around the path to handle spaces in the file path
 batchFilePath = """" & batchFilePath & """"

@@ -10,7 +10,7 @@ if "%MARKOFIDLE%"=="" (
     exit /b 1
 )
 
-cd %MARKOFIDLE%
+cd %MARKOFIDLE%\scripts
 
 REM Activate the virtual environment
 call venv\Scripts\activate.bat
