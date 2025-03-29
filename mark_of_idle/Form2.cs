@@ -23,7 +23,8 @@ namespace mark_of_idle
             bool isNewInstance;
             Mutex mutex = new Mutex(true, "MarkOfIdle", out isNewInstance);
 
-            if(!isNewInstance) {
+            if (!isNewInstance)
+            {
                 MessageBox.Show("Another instance of the program is already running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
             }
@@ -104,6 +105,7 @@ namespace mark_of_idle
 
             start_on_boot_yes.Checked = false;
             start_on_boot_no.Checked = true;
+            threshold_field.Value = this.script_instance.settings.result.threshold;
 
             if (this.script_instance.boot_start_up.IsBootStartUp)
             {
@@ -182,6 +184,6 @@ namespace mark_of_idle
             this.Close();
         }
 
-
+      
     }
 }

@@ -27,16 +27,19 @@
 				<Directory Id="INSTALLFOLDER" Name="Mark_Of_Idle">
 					<!-- Files will be installed here -->
 					<Component Id="mark_of_idle_setup" Guid="{160A62F1-7E07-431C-B030-FB59A171B203}">
-						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\output\mark_of_idle.exe" />
-						<File Id="dependency1" Name="Newtonsoft.Json.dll" Source="..\output\Newtonsoft.Json.dll" />
-						<File Id="dependency2" Name="mark_of_idle.dll" Source="..\output\mark_of_idle.dll" />
-						<File Id="dependency3" Name="mark_of_idle.deps.json" Source="..\output\mark_of_idle.deps.json" />
-						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\output\mark_of_idle.pdb" />
-						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\output\mark_of_idle.runtimeconfig.json" />
+						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\output\app\mark_of_idle.exe" />
+						<File Id="dependency1" Name="Newtonsoft.Json.dll" Source="..\output\app\Newtonsoft.Json.dll" />
+						<File Id="dependency2" Name="mark_of_idle.dll" Source="..\output\app\mark_of_idle.dll" />
+						<File Id="dependency3" Name="mark_of_idle.deps.json" Source="..\output\app\mark_of_idle.deps.json" />
+						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\output\app\mark_of_idle.pdb" />
+						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\output\app\mark_of_idle.runtimeconfig.json" />
 						<File Id="dependency6" Name="scripts.zip" Source="..\output\scripts.zip" />
 						<File Id="dependency7" Name="setup.bat" Source="..\setup.bat" />
 						<File Id="dependency8" Name="first.bat" Source="..\first.bat" />
 						<File Id="dependency9" Name="shortcut.vbs" Source="..\shortcut.vbs" />
+						<File Id="dependency10" Name="uninstall.exe" Source="..\output\uninstall\uninstall.exe" />
+						<File Id="dependency11" Name="System.CodeDom.dll" Source="..\output\uninstall\System.CodeDom.dll" />
+						<File Id="dependency12" Name="System.Management.dll" Source="..\output\uninstall\System.Management.dll" />
 					</Component>
 				</Directory>
 			</StandardDirectory>

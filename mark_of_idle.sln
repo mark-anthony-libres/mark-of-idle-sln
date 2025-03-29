@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mark_of_idle", "mark_of_idl
 EndProject
 Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "mark_of_idle_setup", "setup\mark_of_idle_setup.wixproj", "{EF878227-C085-4F3E-9319-F5292C7F84F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninstall", "uninstall\uninstall.csproj", "{E21E92B6-72CC-AEEC-A552-9A01956B7C55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{EF878227-C085-4F3E-9319-F5292C7F84F2}.Release|x64.Build.0 = Release|x86
 		{EF878227-C085-4F3E-9319-F5292C7F84F2}.Release|x86.ActiveCfg = Release|x86
 		{EF878227-C085-4F3E-9319-F5292C7F84F2}.Release|x86.Build.0 = Release|x86
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|x64.Build.0 = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Debug|x86.Build.0 = Debug|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x64.ActiveCfg = Release|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x64.Build.0 = Release|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x86.ActiveCfg = Release|Any CPU
+		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

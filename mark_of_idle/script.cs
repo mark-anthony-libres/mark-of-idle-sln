@@ -90,20 +90,20 @@ namespace mark_of_idle
 
         private string LoadLatestLogFile()
         {
-            var logFiles = Directory.GetFiles(this.folder_path, "logfile.log.*")
-                                    .OrderByDescending(f => File.GetLastWriteTime(f))  // Sort by last modified time
-                                    .ToList();
-            //.OrderByDescending(f => GetDateFromFilename(f))
-            //.ToList();
-
-            if (logFiles.Any())
+            try
             {
-                return logFiles.First();
+                var logFiles = Directory.GetFiles(this.folder_path, "logfile.log.*")
+                                    .OrderByDescending(f => File.GetLastWriteTime(f));  // Sort by last modified time
+                //.OrderByDescending(f => GetDateFromFilename(f))
+                //.ToList();
+
+                return logFiles.FirstOrDefault(); // Returns the first file or null if none exists
             }
-            else
+            catch(System.IO.DirectoryNotFoundException e)
             {
                 return null;
             }
+            
         }
 
 
@@ -220,7 +220,7 @@ namespace mark_of_idle
 
         public Script()
         {
-            this.project_path = Environment.GetEnvironmentVariable("MARKOFIDLE");
+            this.project_path = Environment.GetEnvironmentVariable("MARKOFIDLE", EnvironmentVariableTarget.Machine);
             this.scriptsFolder = Path.Combine(this.project_path, "scripts");
 
             if (string.IsNullOrEmpty(this.project_path))
@@ -249,7 +249,7 @@ namespace mark_of_idle
         public void activate()
         {
            
-            string command = $"/C cd \"{this.project_path}\" && .\\scripts\\Infra\\run_venv.bat";
+            string command = $"/C cd \"{this.project_path}\" &&  .\\scripts\\Infra\\run_venv.bat";
             this.doProccess(command);
 
         }

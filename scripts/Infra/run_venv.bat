@@ -1,5 +1,6 @@
 @echo off
 
+for /f "tokens=3" %%a in ('reg query "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v MARKOFIDLE 2^>nul') do set MARKOFIDLE=%%a
 
 REM Echo the value of MARKOFIDLE environment variable to check if it's set correctly
 echo %MARKOFIDLE%

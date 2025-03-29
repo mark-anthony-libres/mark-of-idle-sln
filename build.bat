@@ -1,5 +1,7 @@
 @echo off
 
+set OUTPUT_DIR=%1
+
 :: Delete all files and subfolders in the output folder
 echo  ======= Deleting all items in the output folder...  =======
 del /f /s /q ".\output\*" 
@@ -14,15 +16,24 @@ mkdir ".\output\temp_scripts"
 
 copy ".\debug.bat" ".\output"
 
-
 :: Copy contents of the mark_of_idle\bin\Debug\net8.0-windows folder to the output folder
-echo ======= Copying contents of mark_of_idle\bin\Debug\net8.0-windows to output folder...  =======
-xcopy /E /H /Y ".\mark_of_idle\bin\Debug\net8.0-windows\*" ".\output\"
+echo ======= %OUTPUT_DIR% to output folder...  =======
+mkdir ".\output\app" 
+xcopy /E /H /Y %OUTPUT_DIR% ".\output\app"
 
 
 echo ======= Activating venv inside of script and updating requirements.txt =======
-call ".\scripts\venv\Scripts\activate.bat" 
-call pip freeze > ".\scripts\requirements.txt"
+:: Check if the venv directory exists
+IF NOT EXIST ".\scripts\venv\Scripts\activate.bat" (
+    echo No virtual environment found. Creating venv...
+    python -m venv .\scripts\venv
+    call ".\scripts\venv\Scripts\activate.bat" 
+    call pip install -r ".\scripts\requirements.txt"
+) ELSE (
+    echo Virtual environment already exists.
+    call ".\scripts\venv\Scripts\activate.bat" 
+    call pip freeze > ".\scripts\requirements.txt"
+)
 call ".\scripts\venv\Scripts\deactivate.bat"
 
 echo ======= Copying contents of scripts to output folder...  =======
@@ -40,13 +51,13 @@ cd "../../"
 
 :: Adjust the path to your WiX project
 set SETUP_PROJECT=.\setup\mark_of_idle_setup.wixproj  
+set UNINSTALL_PROJECT=.\uninstall\uninstall.csproj  
 
+echo  ======= Building the uninstall project...  =======
+msbuild "%UNINSTALL_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
 
 echo  ======= Building the setup project...  =======
 msbuild "%SETUP_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
-
-echo  ======= Copying contents of setup\bin\Debug to output folder...  =======
-xcopy /E /H /Y ".\setup\bin\Debug" ".\output\"
 
 
 echo  ======= Remove temp_scripts folder  =======

@@ -1,9 +1,17 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
-import sys
+import sys, os
 
 # Set up logging with TimedRotatingFileHandler
-log_filename = "logs/logfile"  # Log files will be in this directory
+log_directory = "logs/"
+log_filename = f"{log_directory}logfile"  # Log files will be in this directory
+
+if not os.path.exists(log_directory):
+    os.makedirs(log_directory)
+    print(f"Directory '{log_directory}' created.")
+else:
+    print(f"Directory '{log_directory}' already exists.")
+    
 
 handler = TimedRotatingFileHandler(
     log_filename + ".log",  # Log file pattern, the handler will append the date

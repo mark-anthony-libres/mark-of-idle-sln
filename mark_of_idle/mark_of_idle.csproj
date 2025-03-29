@@ -29,7 +29,11 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cmd.exe /c &quot;cd ..\ &amp;&amp; build.bat&quot; " />
+    <Exec Command="cmd.exe /c &quot;cd ..\ &amp;&amp; build.bat $(ProjectDir)$(OutDir)&quot; " />
+  </Target>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cmd.exe /c &quot;cd ..\ &amp;&amp; prebuild.bat&quot; " />
   </Target>
 
 </Project>
