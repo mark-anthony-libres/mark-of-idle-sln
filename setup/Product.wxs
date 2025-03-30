@@ -9,14 +9,12 @@
 		<Feature Id="ProductFeature" Title="Mark of Idle" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
 		</Feature>
-		
-		 <CustomAction Id="RunBatchFileAction" Execute="deferred" Return="check" Impersonate="yes" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]first.bat" />
 
-		<CustomAction Id="UninstallCustomAction" ExeCommand='/c echo Uninstalling MyApp...' Execute="deferred" Return="check" Impersonate="no" FileRef="mark_of_idle_exe" />
-	
+		<CustomAction Id="RunBatchFileAction" Execute="deferred" Return="check" Impersonate="yes" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]first.bat" />
+		<CustomAction Id="UninstallCustomAction" Execute="deferred" Return="check" Impersonate="yes" Directory="INSTALLFOLDER" ExeCommand="[INSTALLFOLDER]uninstall.exe" />
 		<InstallExecuteSequence>
-		    <Custom Action="RunBatchFileAction" After="InstallFiles" />
-			<Custom Action="UninstallCustomAction" After="RemoveFiles" Condition="REMOVE" />
+		    <Custom Action="RunBatchFileAction" After="InstallFiles" Condition="NOT REMOVE" />
+			<Custom Action="UninstallCustomAction" Before="RemoveFiles" Condition="REMOVE" />
 		</InstallExecuteSequence>
 
 		
@@ -27,19 +25,12 @@
 				<Directory Id="INSTALLFOLDER" Name="Mark_Of_Idle">
 					<!-- Files will be installed here -->
 					<Component Id="mark_of_idle_setup" Guid="{160A62F1-7E07-431C-B030-FB59A171B203}">
-						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\output\app\mark_of_idle.exe" />
-						<File Id="dependency1" Name="Newtonsoft.Json.dll" Source="..\output\app\Newtonsoft.Json.dll" />
-						<File Id="dependency2" Name="mark_of_idle.dll" Source="..\output\app\mark_of_idle.dll" />
-						<File Id="dependency3" Name="mark_of_idle.deps.json" Source="..\output\app\mark_of_idle.deps.json" />
-						<File Id="dependency4" Name="mark_of_idle.pdb" Source="..\output\app\mark_of_idle.pdb" />
-						<File Id="dependency5" Name="mark_of_idle.runtimeconfig.json" Source="..\output\app\mark_of_idle.runtimeconfig.json" />
+						<File Id="mark_of_idle_exe" Name="mark_of_idle.exe" Source="..\output\mark_of_idle.exe" />
 						<File Id="dependency6" Name="scripts.zip" Source="..\output\scripts.zip" />
 						<File Id="dependency7" Name="setup.bat" Source="..\setup.bat" />
 						<File Id="dependency8" Name="first.bat" Source="..\first.bat" />
 						<File Id="dependency9" Name="shortcut.vbs" Source="..\shortcut.vbs" />
-						<File Id="dependency10" Name="uninstall.exe" Source="..\output\uninstall\uninstall.exe" />
-						<File Id="dependency11" Name="System.CodeDom.dll" Source="..\output\uninstall\System.CodeDom.dll" />
-						<File Id="dependency12" Name="System.Management.dll" Source="..\output\uninstall\System.Management.dll" />
+						<File Id="dependency10" Name="uninstall.exe" Source="..\output\uninstall.exe" />
 					</Component>
 				</Directory>
 			</StandardDirectory>

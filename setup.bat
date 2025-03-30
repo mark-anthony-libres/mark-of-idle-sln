@@ -1,6 +1,13 @@
 @echo off
 setlocal enabledelayedexpansion
 
+
+
+:: Display current date and time
+echo =========================== Current date and time: %date% %time% =================================
+
+
+
 :: Initialize the variables
 set "python_path="
 set "pip_path="
@@ -82,8 +89,6 @@ cd %BASE_DIRECTORY%
 
 echo "go back to main directory %BASE_DIRECTORY%"
 
-echo  ======= Remove misc file  =======
-rmdir /s /q %ZIP_FILE%
 
 echo ========= set environemt variable =========
 setx MARKOFIDLE "%BASE_DIRECTORY%" /M
@@ -91,6 +96,10 @@ setx MARKOFIDLE "%BASE_DIRECTORY%" /M
 echo ========= create shortcut =========
 cscript //nologo "%BASE_DIRECTORY%\shortcut.vbs"
 
+echo  ======= Remove misc file  =======
+del /s /q %ZIP_FILE%
+del /s /q "%BASE_DIRECTORY%\shortcut.vbs"
+
 echo ======= Starting the application ======
-start /B mark_of_idle.exe
+start /B mark_of_idle.exe 
 

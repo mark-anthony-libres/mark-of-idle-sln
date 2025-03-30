@@ -1,7 +1,5 @@
 @echo off
 
-
-:: cmd.exe /c "cd ..\ && build.bat $(ProjectDir)$(OutDir)"
 set OUTPUT_DIR=%1
 
 :: Delete all files and subfolders in the output folder
@@ -56,7 +54,7 @@ set SETUP_PROJECT=.\setup\mark_of_idle_setup.wixproj
 set UNINSTALL_PROJECT=.\uninstall\uninstall.csproj  
 
 echo  ======= Building the uninstall project...  =======
-dotnet publish "%UNINSTALL_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true -p:PublishTrimmed=true --output ".\output"
+msbuild "%UNINSTALL_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
 
 echo  ======= Building the setup project...  =======
 msbuild "%SETUP_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build

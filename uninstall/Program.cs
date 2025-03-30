@@ -5,6 +5,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Management;
+//using System.Management;
 
 namespace uninstall
 {
@@ -37,30 +38,57 @@ namespace uninstall
         }
     }
 
-    public class Data { public bool is_active { get; set; } }
+    public class Data { 
+        public bool is_active { get; set; }
+
+        public Data() { }
+
+    }
 
     class Program
     {
         static void Main(string[] args)
         {
-            stopApp("mark_of_idle.exe");
-            StoppingScript stoppingScript = new StoppingScript();
-            stoppingScript.StopScript();
-            DeleteShortcut("Mark of Idle");
-            DeleteDirectoryContents();
-
             string path = Environment.GetEnvironmentVariable("MARKOFIDLE");
-            
-            UninstallApp("Mark of Idle");
-            Environment.SetEnvironmentVariable("MARKOFIDLE", null, EnvironmentVariableTarget.Machine);
 
-            Console.WriteLine("Successfully uninstall the app you can now close this window");
+            Console.WriteLine($"Path: {path}");
+            Console.WriteLine("Are you sure you want to uninstall (Yes/No)");
+
+            string userInput = Console.ReadLine();
+
+            if (string.Equals(userInput, "yes", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Starting to uninstall...");
+                stopApp("mark_of_idle.exe");
+                StoppingScript stoppingScript = new StoppingScript();
+                stoppingScript.StopScript();
+                DeleteShortcut("Mark of Idle");
+                //DeleteDirectoryContents();
+
+                //UninstallApp("Mark of Idle");
+                Environment.SetEnvironmentVariable("MARKOFIDLE", null, EnvironmentVariableTarget.Machine);
+
+                Console.WriteLine("Successfully uninstall the app you can now close this window");
+
+            }
+            else if (string.Equals(userInput, "no", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("Uninstallation canceled.");
+                System.Threading.Thread.Sleep(1000); // Pause for 1 second
+                Environment.Exit(0); // Exit the application
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter 'Yes' or 'No'.");
+                System.Threading.Thread.Sleep(1000); // Pause for 1 second
+                Environment.Exit(0); // Exit the application
+            }
+           
 
         }
 
         static void stopApp(string processName)
         {
-            Console.WriteLine("Starting to uninstall...");
             Console.WriteLine("Checking if the application is running...");
 
             var processes = Process.GetProcessesByName(processName.Replace(".exe", ""));
@@ -118,9 +146,9 @@ namespace uninstall
                     Console.WriteLine("Uninstallation completed.");
                 }
                 catch (Exception ex) { Console.WriteLine($"Error: {ex.Message}"); }
-                }
             }
-
-
         }
+
+
+    }
 }

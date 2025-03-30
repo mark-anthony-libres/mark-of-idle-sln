@@ -1,8 +1,6 @@
 @echo off
 
-
-:: cmd.exe /c "cd ..\ && build.bat $(ProjectDir)$(OutDir)"
-set OUTPUT_DIR=%1
+@REM set OUTPUT_DIR=%1
 
 :: Delete all files and subfolders in the output folder
 echo  ======= Deleting all items in the output folder...  =======
@@ -19,9 +17,15 @@ mkdir ".\output\temp_scripts"
 copy ".\debug.bat" ".\output"
 
 :: Copy contents of the mark_of_idle\bin\Debug\net8.0-windows folder to the output folder
-echo ======= %OUTPUT_DIR% to output folder...  =======
-mkdir ".\output\app" 
-xcopy /E /H /Y %OUTPUT_DIR% ".\output\app"
+@REM echo ======= %OUTPUT_DIR% to output folder...  =======
+@REM mkdir ".\output\app" 
+@REM xcopy /E /H /Y %OUTPUT_DIR% ".\output\app"
+
+set APP_PROJECT=.\mark_of_idle\mark_of_idle.csproj  
+
+
+echo  ======= Publish the app project...  =======
+dotnet publish "%APP_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true --output ".\output"
 
 
 echo ======= Activating venv inside of script and updating requirements.txt =======
@@ -55,8 +59,8 @@ cd "../../"
 set SETUP_PROJECT=.\setup\mark_of_idle_setup.wixproj  
 set UNINSTALL_PROJECT=.\uninstall\uninstall.csproj  
 
-echo  ======= Building the uninstall project...  =======
-dotnet publish "%UNINSTALL_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true -p:PublishTrimmed=true --output ".\output"
+echo  ======= Publish the uninstall project...  =======
+dotnet publish "%UNINSTALL_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true --output ".\output"
 
 echo  ======= Building the setup project...  =======
 msbuild "%SETUP_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
