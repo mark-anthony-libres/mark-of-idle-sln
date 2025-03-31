@@ -100,6 +100,8 @@ echo  ======= Remove misc file  =======
 del /s /q %ZIP_FILE%
 del /s /q "%BASE_DIRECTORY%\shortcut.vbs"
 
-echo ======= Starting the application ======
-start /B mark_of_idle.exe 
+@REM echo ======= Starting the application ======
+@REM start /B mark_of_idle.exe 
 
+echo ======= Successfully Installed ======
+exit \b 0

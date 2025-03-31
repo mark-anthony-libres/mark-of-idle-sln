@@ -9,6 +9,8 @@ Project("{B7DD6F7E-DEF8-4E67-B5B7-07EF123DB6F0}") = "mark_of_idle_setup", "setup
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uninstall", "uninstall\uninstall.csproj", "{E21E92B6-72CC-AEEC-A552-9A01956B7C55}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "setup_v1", "setup_v1\setup_v1.csproj", "{7E538901-6C51-47EB-B593-08E99010B6AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x64.Build.0 = Release|Any CPU
 		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x86.ActiveCfg = Release|Any CPU
 		{E21E92B6-72CC-AEEC-A552-9A01956B7C55}.Release|x86.Build.0 = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|x64.Build.0 = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|x64.ActiveCfg = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|x64.Build.0 = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{7E538901-6C51-47EB-B593-08E99010B6AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,17 +1,19 @@
 @echo off
+setlocal enabledelayedexpansion
 
-for /f "tokens=3" %%a in ('reg query "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v MARKOFIDLE 2^>nul') do set MARKOFIDLE=%%a
+for /f "tokens=3" %%a in ('reg query "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v MARKOFIDLE 2^>nul') do set (MARKOFIDLE=%%a)
 
 REM Echo the value of MARKOFIDLE environment variable to check if it's set correctly
-echo %MARKOFIDLE%
+echo hello =>> !MARKOFIDLE!
 
-REM Ensure MARKOFIDLE is pointing to the correct project directory and that it ends with a backslash
-if "%MARKOFIDLE%"=="" (
-    echo ERROR: MARKOFIDLE environment variable is not set.
-    exit /b 1
+REM Check if the variable is set
+if defined MARKOFIDLE (
+    echo Value of MARKOFIDLE: !MARKOFIDLE!
+) else (
+    echo MARKOFIDLE is not set or registry value not found.
 )
 
-cd %MARKOFIDLE%\scripts
+cd /d "!MARKOFIDLE!\scripts"
 
 REM Activate the virtual environment
 call venv\Scripts\activate.bat
@@ -21,3 +23,6 @@ python main.py
 
 REM Optionally deactivate the environment after execution
 deactivate
+
+
+endlocal

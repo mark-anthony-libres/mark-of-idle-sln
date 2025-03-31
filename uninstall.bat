@@ -1,7 +1,15 @@
 @echo off
 setlocal
 
-echo Please don't close the window, this will clean up the remaining files to remove...
+echo This script will now clean up any remaining files associated with the application.
+echo It is triggered after you click "Uninstall" in the Apps & Features section.
+echo The cleanup process will finalize any leftover files, ensuring the application is fully removed from your system.
+echo If you want to manually uninstall the application, please find the file "uninstall.exe".
+
+echo %MARKOFIDLE% | findstr /I "repos" >nul
+if %errorlevel% equ 0 (
+    exit \b 1
+)
 
 echo =========== STOP THE APP ===========
 
@@ -28,30 +36,30 @@ powershell -Command "$json = Get-Content -Path '%JSON_FILE%' | ConvertFrom-Json;
 
 echo "The is_active value has been set to false."
 
-@REM echo =========== REMOVING FILES AND FOLDERS ===========
+echo =========== REMOVING FILES AND FOLDERS ===========
 
-@REM :: Delete all files in %MARKOFIDLE% directory
-@REM del /f /q "%MARKOFIDLE%\*.*"
+:: Delete all files in %MARKOFIDLE% directory
+del /f /q "%MARKOFIDLE%\*.*"
 
-@REM :: Remove all subdirectories in %MARKOFIDLE%
-@REM rd /s /q "%MARKOFIDLE%"
+:: Remove all subdirectories in %MARKOFIDLE%
+rd /s /q "%MARKOFIDLE%"
 
-@REM echo =========== REMOVING SHORTCUT ===========
+echo =========== REMOVING SHORTCUT ===========
 
-@REM :: Set the name of the shortcut (replace with your shortcut name)
-@REM set shortcutName="Mark of Idle"
+:: Set the name of the shortcut (replace with your shortcut name)
+set shortcutName="Mark of Idle"
 
-@REM :: Define the path to the Start Menu shortcuts folder
-@REM set shortcutPath=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%shortcutName%.lnk
+:: Define the path to the Start Menu shortcuts folder
+set shortcutPath=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%shortcutName%.lnk
 
-@REM :: Check if the shortcut exists
-@REM if exist "%shortcutPath%" (
-@REM     :: Try to delete the shortcut
-@REM     del /f /q "%shortcutPath%"
-@REM     echo Shortcut "%shortcutName%.lnk" deleted.
-@REM ) else (
-@REM     echo Shortcut "%shortcutName%.lnk" does not exist.
-@REM )
+:: Check if the shortcut exists
+if exist "%shortcutPath%" (
+    :: Try to delete the shortcut
+    del /f /q "%shortcutPath%"
+    echo Shortcut "%shortcutName%.lnk" deleted.
+) else (
+    echo Shortcut "%shortcutName%.lnk" does not exist.
+)
 
 
-@REM endlocal
+endlocal

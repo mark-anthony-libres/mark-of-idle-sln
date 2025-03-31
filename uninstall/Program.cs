@@ -51,6 +51,12 @@ namespace uninstall
         {
             string path = Environment.GetEnvironmentVariable("MARKOFIDLE");
 
+            if (path != null && path.IndexOf("repos", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                // If the string contains "repos", exit with code 1
+                Environment.Exit(1);
+            }
+
             Console.WriteLine($"Path: {path}");
             Console.WriteLine("Are you sure you want to uninstall (Yes/No)");
 

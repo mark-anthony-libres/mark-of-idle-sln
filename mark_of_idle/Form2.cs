@@ -184,6 +184,9 @@ namespace mark_of_idle
             this.Close();
         }
 
-      
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

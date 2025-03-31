@@ -1,0 +1,20 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Remove="resources\mark_of_idle.exe" />
+    <None Remove="resources\scripts.zip" />
+    <None Remove="resources\setup.bat" />
+    <None Remove="resources\first.bat" />
+    <None Remove="resources\uninstall.bat" />
+    <None Remove="resources\shortcut.vbs" />
+    <None Remove="resources\uninstall.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\mark_of_idle.exe" />
+    <EmbeddedResource Include="resources\scripts.zip" />
+    <EmbeddedResource Include="resources\setup.bat" />
+    <EmbeddedResource Include="resources\first.bat" />
+    <EmbeddedResource Include="resources\uninstall.bat" />
+    <EmbeddedResource Include="resources\shortcut.vbs" />
+    <EmbeddedResource Include="resources\uninstall.exe" />
+  </ItemGroup>
+</Project>

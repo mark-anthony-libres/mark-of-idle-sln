@@ -2,6 +2,8 @@
 
 @REM set OUTPUT_DIR=%1
 
+set ORIGINAL_DIR=%CD%
+
 :: Delete all files and subfolders in the output folder
 echo  ======= Deleting all items in the output folder...  =======
 del /f /s /q ".\output\*" 
@@ -58,12 +60,20 @@ cd "../../"
 :: Adjust the path to your WiX project
 set SETUP_PROJECT=.\setup\mark_of_idle_setup.wixproj  
 set UNINSTALL_PROJECT=.\uninstall\uninstall.csproj  
+set SETUP_V1_PROJECT=.\setup_v1\setup_v1.csproj  
 
 echo  ======= Publish the uninstall project...  =======
 dotnet publish "%UNINSTALL_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true --output ".\output"
 
-echo  ======= Building the setup project...  =======
-msbuild "%SETUP_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
+@REM echo  ======= Building the setup project...  =======
+@REM msbuild "%SETUP_PROJECT%" /p:Configuration=Debug /p:Platform="x86" /t:Build
+
+echo  ======= Publish the setup project...  =======
+cd .\setup_v1
+powershell -ExecutionPolicy Bypass -File ".\compile.ps1"
+cd %ORIGINAL_DIR%
+
+dotnet publish "%SETUP_V1_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true --output ".\output"
 
 
 echo  ======= Remove temp_scripts folder  =======

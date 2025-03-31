@@ -159,6 +159,7 @@
             MaximizeBox = false;
             Name = "Form2";
             Text = "Mark of Idle";
+            Load += Form2_Load;
             ((System.ComponentModel.ISupportInitialize)threshold_field).EndInit();
             ResumeLayout(false);
             PerformLayout();
