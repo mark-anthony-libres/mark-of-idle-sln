@@ -13,6 +13,9 @@ prepare:
   script:
     - echo "Running prepare.bat..."
     - echo $env:CI_PROJECT_DIR
+    - echo "Listing files:"
+    - dir  # On Windows, list files in the current directory
+    - echo "Running prepare.bat..."
     - ./infra/prepare.bat
   tags:
     - windows
