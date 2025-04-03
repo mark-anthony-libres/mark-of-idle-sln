@@ -18,11 +18,6 @@ mkdir ".\output\temp_scripts"
 
 copy ".\debug.bat" ".\output"
 
-:: Copy contents of the mark_of_idle\bin\Debug\net8.0-windows folder to the output folder
-@REM echo ======= %OUTPUT_DIR% to output folder...  =======
-@REM mkdir ".\output\app" 
-@REM xcopy /E /H /Y %OUTPUT_DIR% ".\output\app"
-
 set APP_PROJECT=.\mark_of_idle\mark_of_idle.csproj  
 
 
