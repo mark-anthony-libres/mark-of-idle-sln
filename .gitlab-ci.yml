@@ -12,7 +12,7 @@ prepare:
   stage: prepare
   script:
     - echo "Running prepare.bat..."
-    - echo %CI_PROJECT_DIR%
+    - echo "%ORIGINAL_DIR%"
     - call ./infra/prepare.bat
   tags:
     - windows
