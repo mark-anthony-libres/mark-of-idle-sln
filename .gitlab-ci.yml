@@ -1,0 +1,18 @@
+stages:
+  - prepare
+
+
+variables:
+  ORIGINAL_DIR: "%CI_PROJECT_DIR%"
+  OUTPUT_DIR: "./output"
+  APP_PROJECT: "./mark_of_idle/mark_of_idle.csproj"
+  SETUP_V1_PROJECT: "./setup_v1/setup_v1.csproj"
+  UNINSTALL_PROJECT: "./uninstall/uninstall.csproj"
+
+prepare:
+  stage: prepare
+  script:
+    - echo "Running prepare.bat..."
+    - call prepare.bat
+  tags:
+    - windows
