@@ -1,7 +1,6 @@
 stages:
   - prepare
 
-
 variables:
   ORIGINAL_DIR: "%CI_PROJECT_DIR%"
   OUTPUT_DIR: "./output"
