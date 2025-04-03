@@ -13,3 +13,5 @@ echo creating temp_scripts folder
 mkdir ".\output\temp_scripts" 
 
 copy ".\debug.bat" ".\output"
+
+echo %APP_PROJECT%
