@@ -1,6 +1,5 @@
 stages:
-  - prepare
-  - build
+  - deployable
 
 variables:
   ORIGINAL_DIR: "%CI_PROJECT_DIR%"
@@ -11,35 +10,19 @@ variables:
 
 image: mcr.microsoft.com/dotnet/sdk:latest
 
-prepare:
-  stage: prepare
+deployable:
+  stage: deployable
   script:
     - echo "Project Current Directory"
     - echo $env:CI_PROJECT_DIR
     - echo "Listing files:"
     - dir  # On Windows, list files in the current directory
-    - echo "Running prepare.bat..."
-    - ./infra/prepare.bat
-  artifacts:
-    paths:
-      - output 
+    - echo "Running deployable.bat..."
+    - ./infra/deployable.bat
   tags:
     - windows
     
 
-
-build:
-  stage: build
-  script:
-    - echo "Project Current Directory"
-    - echo $env:CI_PROJECT_DIR
-    - echo "Listing files:"
-    - echo "Running build.bat..."
-    - ./infra/build.bat
-  dependencies:
-    - prepare
-  tags:
-    - windows
 
 
   

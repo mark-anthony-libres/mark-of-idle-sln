@@ -1,5 +1,7 @@
 @echo off
 
+tree /f 
+
 echo  ======= Publish the app project...  =======
 dotnet publish "%APP_PROJECT%" -c Release -r win-x64 --self-contained -p:PublishSingleFile=true -p:ReadyToRun=true --output ".\output" || exit /b 1
 
@@ -20,7 +22,6 @@ call ".\scripts\venv\Scripts\deactivate.bat" || exit /b 1
 
 :: Now zip the scripts folder
 echo  ======= Zipping scripts folder  =======
-tree /f
 cd  "output\temp_scripts" || exit /b 1
 echo "current Directory: %CD%"
 tar -a -c -f "..\scripts.zip" "*" || exit /b 1
