@@ -3,6 +3,7 @@ stages:
   - cleanup
 
 variables:
+  GIT_BRANCH: "$CI_COMMIT_REF_NAME"
   ORIGINAL_DIR: "%CI_PROJECT_DIR%"
   OUTPUT_DIR: "./output"
   APP_PROJECT: "./mark_of_idle/mark_of_idle.csproj"
@@ -30,7 +31,7 @@ revert_changes:
   script:
     - echo "Printing all environment variables..."
     - env
-    - echo "The value of CI_COMMIT_REF_NAME is $($env:CI_COMMIT_REF_NAME)"
+    - echo "The value of CI_COMMIT_REF_NAME is $GIT_BRANCH"
     - |
       echo "Pipeline failed, reverting changes..."
       git fetch origin
