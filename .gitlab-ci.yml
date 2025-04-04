@@ -1,5 +1,6 @@
 stages:
   - deployable
+  - cleanup
 
 variables:
   ORIGINAL_DIR: "%CI_PROJECT_DIR%"
@@ -29,15 +30,7 @@ deployable:
 revert_changes:
   stage: cleanup
   script:
-    - |
-      if [ "$CI_JOB_STATUS" == "failed" ]; then
-        echo "Pipeline failed, reverting changes..."
-        git fetch origin
-        git reset --hard HEAD~1  # Reverts the last commit
-        git push origin HEAD:refs/heads/$CI_COMMIT_REF_NAME --force  # Pushes the revert back to the branch
-      else
-        echo "Pipeline succeeded, skipping revert."
-      fi
+    - echo "Pipleline Is Fail"
   when: on_failure  # Only runs if a previous job failed
   only:
     - main 
