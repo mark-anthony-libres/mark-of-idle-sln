@@ -15,7 +15,7 @@ prepare:
   stage: prepare
   script:
     - echo "Running prepare.sh..."  # Change from prepare.bat to prepare.sh
-    - echo "Current Directory: $CI_PROJECT_DIR"
+    - echo "Current Directory $CI_PROJECT_DIR"
     - echo "Listing files:"
     - ls -l  # List files in the current directory (Linux equivalent of dir)
     - echo "Running prepare.sh..."
