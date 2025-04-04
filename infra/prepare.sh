@@ -14,5 +14,3 @@ mkdir ./output/temp_scripts
 
 # Copy the debug.bat to the output folder
 cp ./debug.bat ./output/
-
-echo "APP_PROJECT = $APP_PROJECT"

@@ -25,13 +25,18 @@ prepare:
     - linux  # Ensure you have a runner with the appropriate tag for Linux
 
 
-# build:
-#   stage: build
-#   script:
-#     - echo "Running build.bat..."
-#     - ./infra/build.bat
-#   tags:
-#     - windows
+build:
+  stage: build
+  script:
+    - echo "Running build.sh..." 
+    - echo "Current Directory $CI_PROJECT_DIR"
+    - echo "Listing files:"
+    - ls -l 
+    - echo "Running build.sh..."
+    - chmod +x ./infra/build.sh  
+    - ./infra/build.sh  
+  tags:
+    - linux  
 
 
   
