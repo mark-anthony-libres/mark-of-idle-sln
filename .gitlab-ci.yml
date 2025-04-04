@@ -30,6 +30,7 @@ deployable:
 revert_changes:
   stage: cleanup
   script:
+    - echo $CI_COMMIT_REF_NAME
     - |
       echo "Pipeline failed, reverting changes..."
       git fetch origin
