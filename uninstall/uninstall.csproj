@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
 	  <!-- Ensure the application is framework-dependent -->
 	  <SelfContained>false</SelfContained>
 	  <PublishTrimmed>false</PublishTrimmed>
