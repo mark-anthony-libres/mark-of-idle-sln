@@ -9,8 +9,6 @@ variables:
   SETUP_V1_PROJECT: "./setup_v1/setup_v1.csproj"
   UNINSTALL_PROJECT: "./uninstall/uninstall.csproj"
 
-image: mcr.microsoft.com/dotnet/sdk:latest
-
 deployable:
   stage: deployable
   script:
