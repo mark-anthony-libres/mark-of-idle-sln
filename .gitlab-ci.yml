@@ -18,7 +18,7 @@ deployable:
     - echo "Listing files:"
     - dir  # On Windows, list files in the current directory
     - echo "Running deployable.bat..."
-    - publish.bat
+    - ./publish.bat
   tags:
     - windows
     
