@@ -14,23 +14,24 @@ image: mcr.microsoft.com/dotnet/sdk:latest
 prepare:
   stage: prepare
   script:
-    - echo "Running prepare.bat..."
-    - echo $env:CI_PROJECT_DIR
+    - echo "Running prepare.sh..."  # Change from prepare.bat to prepare.sh
+    - echo "Current Directory: $CI_PROJECT_DIR"
     - echo "Listing files:"
-    - dir  # On Windows, list files in the current directory
-    - echo "Running prepare.bat..."
-    - ./infra/prepare.bat
+    - ls -l  # List files in the current directory (Linux equivalent of dir)
+    - echo "Running prepare.sh..."
+    - chmod +x ./infra/prepare.sh  # Make sure the script is executable
+    - ./infra/prepare.sh  # Run the Linux shell script (prepare.sh instead of prepare.bat)
   tags:
-    - windows
+    - linux  # Ensure you have a runner with the appropriate tag for Linux
 
 
-build:
-  stage: build
-  script:
-    - echo "Running build.bat..."
-    - ./infra/build.bat
-  tags:
-    - windows
+# build:
+#   stage: build
+#   script:
+#     - echo "Running build.bat..."
+#     - ./infra/build.bat
+#   tags:
+#     - windows
 
 
   
