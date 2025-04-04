@@ -1,5 +1,7 @@
 
 
+
+
 # Define the path for the file EmbedResources.targets in the current directory (relative to the script's directory)
 $scriptDirectory = Get-Location  # Get the current directory of the script
 $xmlFilePath = Join-Path -Path $scriptDirectory -ChildPath "EmbedResources.targets"  # Make sure it's within 'setup_v1'
@@ -31,9 +33,17 @@ $CONFIG_FILE = ".\config.json"
 $RESOURCES_FOLDER = ".\resources"
 $PROJECT_FILE = ".\setup_v1.csproj"
 
-# Clear the resources folder (remove existing files)
-Write-Host "Deleting all files in the resources folder... $RESOURCES_FOLDER"
-Remove-Item -Path "$RESOURCES_FOLDER\*" -Force -Recurse
+# Check if the folder exists
+if (-not (Test-Path -Path $RESOURCES_FOLDER)) {
+    Write-Host "Resources folder does not exist. Creating it..."
+    New-Item -Path $RESOURCES_FOLDER -ItemType Directory
+} else {
+    Write-Host "Resources folder already exists."
+    # Clear the resources folder (remove existing files)
+    Write-Host "Deleting all files in the resources folder... $RESOURCES_FOLDER"
+    Remove-Item -Path "$RESOURCES_FOLDER\*" -Force -Recurse
+}
+
 
 # Read the JSON file and loop through the file paths
 $files = Get-Content -Path $CONFIG_FILE | ConvertFrom-Json
