@@ -43,17 +43,7 @@ namespace setup_v1
             MessageBox.Show("Installation completed successfully! Thank you for choosing Mark of Idle.", "Installation Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Debug.WriteLine("Starting the app: " + app);
 
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = app,       // Path to the executable
-                WorkingDirectory = _installManager.MarkOfIdleFolder, // Set working directory to the app's install directory
-                UseShellExecute = false,  // Use the shell to start the app
-                CreateNoWindow = true     // Optionally, run without creating a new window
-            };
-
-            // Start the application
-            Task.Run(() => Process.Start(startInfo));
-
+            Process.Start(app);
             Environment.Exit(0);
         }
 

@@ -19,8 +19,28 @@ deployable:
     - dir  # On Windows, list files in the current directory
     - echo "Running deployable.bat..."
     - ./publish.bat
+  only:
+    - main
   tags:
     - windows
+
+
+  # Job to revert changes if the pipeline fails
+# revert_changes:
+#   stage: cleanup
+#   script:
+#     - |
+#       if [ "$CI_JOB_STATUS" == "failed" ]; then
+#         echo "Pipeline failed, reverting changes..."
+#         git fetch origin
+#         git reset --hard HEAD~1  # Reverts the last commit
+#         git push origin HEAD:refs/heads/$CI_COMMIT_REF_NAME --force  # Pushes the revert back to the branch
+#       else
+#         echo "Pipeline succeeded, skipping revert."
+#       fi
+#   when: on_failure  # Only runs if a previous job failed
+#   only:
+#     - main 
     
 
 
