@@ -14,7 +14,7 @@ image: mcr.microsoft.com/dotnet/sdk:latest
 prepare:
   stage: prepare
   script:
-    - echo "Running prepare.bat..."
+    - echo "Project Current Directory"
     - echo $env:CI_PROJECT_DIR
     - echo "Listing files:"
     - dir  # On Windows, list files in the current directory
@@ -27,6 +27,9 @@ prepare:
 build:
   stage: build
   script:
+    - echo "Project Current Directory"
+    - echo $env:CI_PROJECT_DIR
+    - echo "Listing files:"
     - echo "Running build.bat..."
     - ./infra/build.bat
   tags:

@@ -21,6 +21,7 @@ call ".\scripts\venv\Scripts\deactivate.bat" || exit /b 1
 :: Now zip the scripts folder
 echo  ======= Zipping scripts folder  =======
 cd  "output\temp_scripts" || exit /b 1
+echo %CD%
 tar -a -c -f "..\scripts.zip" "*" || exit /b 1
 cd "../../"
 
