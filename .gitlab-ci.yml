@@ -20,8 +20,12 @@ prepare:
     - dir  # On Windows, list files in the current directory
     - echo "Running prepare.bat..."
     - ./infra/prepare.bat
+  artifacts:
+    paths:
+      - output 
   tags:
     - windows
+    
 
 
 build:
@@ -32,6 +36,8 @@ build:
     - echo "Listing files:"
     - echo "Running build.bat..."
     - ./infra/build.bat
+  dependencies:
+    - prepare
   tags:
     - windows
 
