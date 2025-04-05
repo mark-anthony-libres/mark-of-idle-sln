@@ -2,7 +2,7 @@
 
 @REM set OUTPUT_DIR=%1
 
-@REM exit /b 1
+exit /b 1
 
 set ORIGINAL_DIR=%CD%
 set OUTPUT_DIR=./output
