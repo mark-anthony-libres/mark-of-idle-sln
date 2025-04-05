@@ -41,7 +41,7 @@ revert_changes:
       git reset --hard HEAD~1
 
       # Pushes the revert back to the branch
-      git push origin HEAD:refs/heads/$GIT_BRANCH
+      git push --force origin HEAD:refs/heads/$GIT_BRANCH
   when: on_failure  # Only runs if a previous job failed
   only:
     - main
