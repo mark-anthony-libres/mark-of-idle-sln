@@ -31,6 +31,7 @@ revert_changes:
   script:
     - |
       echo "Pipeline failed, reverting changes..."
+      git remote -v
       ssh -T git@gitlab.com
       git fetch origin
       git reset --hard HEAD~1  # Reverts the last commit
