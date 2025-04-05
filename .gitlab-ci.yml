@@ -3,6 +3,7 @@ stages:
   - cleanup
 
 variables:
+  PROJECT_PATH: "$CI_PROJECT_PATH"
   GIT_BRANCH: "$CI_COMMIT_REF_NAME"
   ORIGINAL_DIR: "%CI_PROJECT_DIR%"
   OUTPUT_DIR: "./output"
@@ -31,8 +32,8 @@ revert_changes:
   script:
     - |
       echo "Pipeline failed, reverting changes..."
+      git remote set-url origin git@gitlab.com:$PROJECT_PATH.git
       git remote -v
-      ssh -T git@gitlab.com
       git fetch origin
       git reset --hard HEAD~1  # Reverts the last commit
       git push origin HEAD:refs/heads/$GIT_BRANCH --force  # Pushes the revert back to the branch
