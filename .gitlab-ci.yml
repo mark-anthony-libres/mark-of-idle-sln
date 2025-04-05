@@ -32,15 +32,15 @@ revert_changes:
   script:
     - |
       echo "Pipeline failed, reverting changes..."
-      git remote set-url origin git@gitlab.com:$PROJECT_PATH.git || exit 1
-      git remote -v || exit 1
-      git fetch origin || exit 1
+      git remote set-url origin git@gitlab.com:$PROJECT_PATH.git
+      git remote -v
+      git fetch origin
 
       # Reverts the last commit
-      git reset --hard HEAD~1 || exit 1 
+      git reset --hard HEAD~1
 
       # Pushes the revert back to the branch
-      git push origin HEAD:refs/heads/$GIT_BRANCH || exit 1
+      git push origin HEAD:refs/heads/$GIT_BRANCH
   when: on_failure  # Only runs if a previous job failed
   only:
     - main
