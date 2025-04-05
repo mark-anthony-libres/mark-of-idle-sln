@@ -31,14 +31,15 @@ revert_changes:
   script:
     - |
       echo "Pipeline failed, reverting changes..."
-      Get-Service -Name ssh-agent
-      ssh-add C:\Users\Administaror\.ssh\id_rsa
+      ssh -T git@gitlab.com
       git fetch origin
       git reset --hard HEAD~1  # Reverts the last commit
       git push origin HEAD:refs/heads/$GIT_BRANCH --force  # Pushes the revert back to the branch
   when: on_failure  # Only runs if a previous job failed
   only:
-    - main 
+    - main
+  tags:
+    - windows 
     
 
 
