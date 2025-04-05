@@ -35,7 +35,7 @@ revert_changes:
       ssh-add C:\Users\Administaror\.ssh\id_rsa
       git fetch origin
       git reset --hard HEAD~1  # Reverts the last commit
-      git push origin HEAD:refs/heads/$GIT_BRANCH --force  # Pushes the revert back  to the branch
+      git push origin HEAD:refs/heads/$GIT_BRANCH --force  # Pushes the revert back to the branch
   when: on_failure  # Only runs if a previous job failed
   only:
     - main 
