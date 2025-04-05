@@ -4,8 +4,6 @@
 :: cmd.exe /c "cd ..\ && build.bat $(ProjectDir)$(OutDir)"
 set OUTPUT_DIR=%1
 
-exit \b 1
-
 :: Delete all files and subfolders in the output folder
 echo  ======= Deleting all items in the output folder...  =======
 del /f /s /q ".\output\*" 
