@@ -34,8 +34,8 @@ revert_changes:
       echo "Pipeline failed, reverting changes..."
       git remote set-url origin git@gitlab.com:$PROJECT_PATH.git
       git remote -v
-      git pull origin $GIT_BRANCH
       git fetch origin
+      git pull origin $GIT_BRANCH --rebase
 
       # Reverts the last commit
       git reset --hard HEAD~1
