@@ -31,6 +31,7 @@ revert_changes:
   script:
     - |
       echo "Pipeline failed, reverting changes..."
+      Get-Service -Name ssh-agent
       ssh-add C:\Users\Administaror\.ssh\id_rsa
       git fetch origin
       git reset --hard HEAD~1  # Reverts the last commit
